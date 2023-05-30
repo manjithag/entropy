@@ -29,8 +29,9 @@ def calc_k_eff_s(original_df : pd.DataFrame, annonymized_df : pd.DataFrame):
 
         entropy_list =[]
         k_eff_list = []
-
+        ecm = 0
         sd = 10
+
 
         for si in original_series:
 
@@ -47,9 +48,11 @@ def calc_k_eff_s(original_df : pd.DataFrame, annonymized_df : pd.DataFrame):
             entropy_list.append(entropy_h_rs)
             k_eff_list.append(k_eff_s)
 
+            ecm += 1 / k_eff_s
+
         output_df = pd.DataFrame({'H(R|s)' : entropy_list, 'k eff' : k_eff_list})
 
-    return output_df
+    return output_df, ecm
 
 
 
