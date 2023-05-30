@@ -10,7 +10,7 @@ annonymized_df = pd.DataFrame({'No': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
                     'q1': [90, 22, 88, 71, 24, 28, 58, 39, 16, 30, 42, 46, 14, 61, 71, 20]})
 
 
-print(calc_k_eff_s(original_df,annonymized_df))
+calc_k_eff_s(original_df,annonymized_df)
 
 #print(original_df)
 #original_series = original_df['s1']

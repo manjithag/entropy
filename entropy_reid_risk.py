@@ -30,16 +30,23 @@ def calc_k_eff_s(original_df : pd.DataFrame, annonymized_df : pd.DataFrame):
         entropy_list =[]
         k_eff_list = []
         ecm = 0
+        ntm = 0
         sd = 10
 
 
-        for si in original_series:
+        for i in range(no_records_original):
+            si = original_series[i]
 
             entropy_h_rs = 0
+            p_rs_list = []
             for ri in annonymized_series:
 
                 p_rs = normal_dist(ri,si,sd)
                 log_p_rs = np.log2(p_rs)
+
+                ##  Calculating NTM
+                p_rs_list.append(p_rs)
+
                 entropy_h_rs += p_rs * log_p_rs
 
             entropy_h_rs = -1 * entropy_h_rs
@@ -50,9 +57,19 @@ def calc_k_eff_s(original_df : pd.DataFrame, annonymized_df : pd.DataFrame):
 
             ecm += 1 / k_eff_s
 
+            max_prob_index = p_rs_list.index(max(p_rs_list))
+
+            if max_prob_index == i:
+                ntm += 1
+                print(i)
+
         output_df = pd.DataFrame({'H(R|s)' : entropy_list, 'k eff' : k_eff_list})
 
-    return output_df, ecm
+        print(output_df)
+        print('ECM = ' + str(ecm))
+        print('NTM = ' + str(ntm))
+
+    #return output_df, ecm, ntm
 
 
 
