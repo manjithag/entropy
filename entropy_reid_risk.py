@@ -1,5 +1,12 @@
 ###  This method of calculating risk of re-identification refers to the research paper of
-###  'M. Bezzi, “An Entropy based method for Measuring Anonymity'.
+###  'M. Bezzi, “An Entropy based method for Measuring Anonymity"'.
+
+    ## S : Original dataset
+    ## s : A record in original dataset ‘S’
+    ## R : Anonymized dataset
+    ## r : A record in anonymized dataset ‘R’, trying to be linked with a ‘s’
+
+
 
 import pandas as pd
 import numpy as np
@@ -17,8 +24,9 @@ def calc_parameters(original_df : pd.DataFrame, anonymized_df : pd.DataFrame, qu
     ## Calculate following parameters
             # Entropy = H(R|s)
             # k_eff (s)
-            # ECM
-            # NTM
+            # ECM       : Average number of correct matches
+            # NTM       : Total number of true matches in the sample
+
     ## Arguments : Original and Anonymized datasets, column name of quasi identifier
 
     no_records_original = original_df.shape[0]
@@ -71,7 +79,7 @@ def calc_parameters(original_df : pd.DataFrame, anonymized_df : pd.DataFrame, qu
         output_df = pd.DataFrame({'H(R|s)' : entropy_list, 'k eff' : k_eff_list})
 
         print(output_df)
-        print('ECM = ' + str(ecm))
+        print('\nECM = ' + str(ecm))
         print('NTM = ' + str(ntm))
 
     #return output_df, ecm, ntm
