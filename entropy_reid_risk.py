@@ -19,7 +19,7 @@ def normal_dist(x, mean, sd):
 
     return prob_density
 
-def calc_parameters(original_df : pd.DataFrame, anonymized_df : pd.DataFrame, quasi_identifier : str ):
+def calc_reid_parameters(original_df : pd.DataFrame, anonymized_df : pd.DataFrame, quasi_identifier : str ):
 
     ## Calculate following parameters
             # Entropy = H(R|s)
